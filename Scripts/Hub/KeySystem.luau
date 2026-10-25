@@ -7,7 +7,7 @@ local Config = {
     Secret          = "Pedrux_n5AQSN0p3Gwe0vPN", 
     
     -- [3] Scripts & Links
-    MainScriptURL   = "https://raw.githubusercontent.com/Pedro-20133/Pedrux-Scripts/refs/heads/Security/Scripts/Security/Main.luau", 
+    MainScriptURL   = "https://raw.githubusercontent.com/Pedro-20133/Pedrux-Scripts/refs/heads/Hub/Scripts/Hub/Main.luau", 
     
     -- [4] Social Media Settings 
     ShowDiscord     = false,
