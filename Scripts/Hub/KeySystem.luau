@@ -100,6 +100,7 @@ local function cacheLink()
     return true, cachedLink
 end
 
+
 local function redeemKey(key)
     local nonce = generateNonce()
     local body = {identifier = lDigest(fGetHwid()), key = key}
@@ -133,6 +134,8 @@ end
 -------------------------------------------------------------------------------
 --! GUI & MAIN SCRIPT EXECUTION
 -------------------------------------------------------------------------------
+
+cacheLink()
 
 local function StartMainScript()
     local player = game:GetService("Players").LocalPlayer
@@ -312,20 +315,36 @@ local function CreateGUI()
             Status.Text = tostring(link); Status.TextColor3 = Color3.fromRGB(255, 100, 100)
         end
     end)
-
-    if isfile and isfile(Config.KeyFileName) then
-        local savedKey = readfile(Config.KeyFileName)
-        if savedKey ~= "" then
-            Status.Text = "Found saved key, verifying..."
-            task.spawn(function()
-                local success, msg = redeemKey(savedKey)
-                if success then
-                    Status.Text = "Auto-login success!"; Status.TextColor3 = Color3.fromRGB(0, 255, 100)
-                    task.wait(0.5); ScreenGui:Destroy(); StartMainScript()
-                else
-                    Status.Text = "Saved key expired or invalid."; Status.TextColor3 = Color3.fromRGB(255, 150, 0)
-                end
-            end)
+	
+	if isfile and isfile(Config.KeyFileName) then
+        local successRead, savedKey = pcall(function()
+            return readfile(Config.KeyFileName)
+        end)
+        
+        if successRead and savedKey then
+            -- Remove espaços ou quebras de linha indesejadas que venham do arquivo de texto
+            savedKey = savedKey:gsub("^%s*(.-)%s*$", "%1")
+            
+            if savedKey ~= "" then
+                Status.Text = "Found saved key, verifying..."
+                task.spawn(function()
+                    local success, msg = redeemKey(savedKey)
+                    if success then
+                        Status.Text = "Auto-login success!"
+                        Status.TextColor3 = Color3.fromRGB(0, 255, 100)
+                        task.wait(0.5)
+                        ScreenGui:Destroy()
+                        StartMainScript()
+                    else
+                        Status.Text = "Saved key expired or invalid."
+                        Status.TextColor3 = Color3.fromRGB(255, 150, 0)
+                        -- Opcional: apaga o arquivo corrompido/expirado para não tentar de novo
+                        pcall(function()
+                            if delfile then delfile(Config.KeyFileName) end
+                        end)
+                    end
+                end)
+            end
         end
     end
 end
@@ -334,4 +353,14 @@ local player = game:GetService("Players").LocalPlayer
 local pGui = player:WaitForChild("PlayerGui")
 
 if pGui:FindFirstChild(Config.MainGuiName) then StartMainScript() return end
+
+local key_script = getgenv().KEY
+if key_script and key_script ~= "" then
+    local success, result = redeemKey(key_script)
+    if success then
+        StartMainScript()
+        return
+    end
+end
+
 CreateGUI()
