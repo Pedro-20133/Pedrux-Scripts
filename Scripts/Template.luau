@@ -1,3 +1,5 @@
+-- PROTECTION SCRIPT
+--[[
 local ProtectionConfig = {
 	SecretKey = "Pedrux_n5AQSN0p3Gwe0vPN",
 	HubName = "Pedrux Hub"
@@ -10,13 +12,12 @@ if not _G[ProtectionConfig.SecretKey] then
 	end
 	return 
 end
-
--------------------------------------------------------------------------------
--- 👇 YOUR MAIN SCRIPT CODE STARTS HERE 👇
--------------------------------------------------------------------------------
-
+]]
+-- SERVICES
 local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
+-- PLAYER OBJS
 local plr = Players.LocalPlayer
 local char, hum, hrp
 
@@ -28,18 +29,20 @@ local function setupChar(newCharacter)
 end
 
 plr.CharacterAdded:Connect(setupChar)
-if plr.Character then 
-	setupChar(plr.Character) 
-end
+if plr.Character then setupChar(plr.Character) end
 
-local placesIds = {}
-for _, place in pairs(placesIds) do
-	if place ~= game.PlaceId then plr:Kick("No support for this experience") end
+local gameIds = {}
+for _, id in pairs(gameIds) do
+	if id ~= game.GameId then plr:Kick("No support for this experience") end
 end
 
 local Tasks = {}
 local TaskData = {}
 
+-- CONFIGS
+local Configs = {}
+
+-- TASKS CONTROLLER
 local function updatePriorities()
 	local highestPriority = math.huge
 	for _, data in TaskData do
@@ -80,6 +83,13 @@ local function addTask(name: string, prioridade: number?, time: number?, callbac
 	local co = coroutine.create(function()
 		if time and time > 0 then
 			while true do
+				-- Se for a task de AutoCollectChests, verifica se o Configs está true
+				if name == "AutoCollectChests" then
+					while not Configs["AutoCollectChests"] do
+						task.wait(1)
+					end
+				end
+
 				while TaskData[name] and TaskData[name].suspended do
 					coroutine.yield()
 				end
@@ -88,6 +98,10 @@ local function addTask(name: string, prioridade: number?, time: number?, callbac
 
 				local elapsed = 0
 				while elapsed < time do
+					if name == "AutoCollectChests" and not Configs["AutoCollectChests"] then
+						break -- Sai do timer se desativar no meio do tempo
+					end
+
 					while TaskData[name] and TaskData[name].suspended do
 						coroutine.yield()
 					end
@@ -144,3 +158,21 @@ local function cancelTasks(tasksToCancel: {string}?)
 	end
 	updatePriorities()
 end
+
+-- GUI
+local Rayfield = loadstring(game:HttpGet("https://sirius.menu/gen2"))()
+local window = Rayfield:CreateWindow({
+	name = "Pedrux Hub - xx Hub",
+	subtitle = "Rayfield Gen2",
+	sidebarLayout = true,
+	configuration = {
+		autoSave = true,      -- save on change
+		autoLoad = true,      -- load on first open
+		fileName = "Xx_Saveawddawdwadawdawdawdwadawdaw",
+		customFolder = "XxSave", -- optional
+	},
+})
+local tabMain = window:CreateTab({ name = "Home", icon = 93364949241311 })
+
+-- TASKS
+-- ...
