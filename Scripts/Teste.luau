@@ -1,1 +1,1 @@
-print("teste")
+print(pairs(_G.Configs))
