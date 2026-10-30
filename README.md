@@ -8,10 +8,10 @@ Scripts de todos os tipos e jogos aqui!
 ## Como obter?
 Executando o código abaixo em qual quer executor
 ```luau
-getgenv().KEY = "" -- Your key
+getgenv().KEY = "" -- OPTIONAL: Your key
 getgenv().SCRIPT_NAME = { -- OPTIONAL: Script Name
 	Name = "",
-  Configs
+  	Configs = {},
 }
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Pedro-20133/Pedrux-Scripts/refs/heads/main/Scripts/Hub/KeySystem.luau"))()
