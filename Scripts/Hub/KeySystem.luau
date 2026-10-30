@@ -43,8 +43,6 @@ local lEncode, lDecode, lDigest = a3, aw, Z;
 
 local useNonce = false
 
-pairs()
-
 local function safeRequest(options)
     local req = request or http_request or syn_request or (http and http.request )
     if not req then return nil, "HTTP requests not supported" end
