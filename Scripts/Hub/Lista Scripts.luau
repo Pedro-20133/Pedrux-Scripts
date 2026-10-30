@@ -1,6 +1,6 @@
 return {
-	["EPT Hub"] = {
-		Name = "EPT Hub",
-		Link = "https://raw.githubusercontent.com/Pedro-20133/Pedrux-Scripts/refs/heads/Main/Scripts/EPT-Hub/Main.luau",
+	["Exemplo"] = {
+		Name = "Teste",
+		Link = "https://raw.githubusercontent.com/Pedro-20133/Pedrux-Scripts/refs/heads/Pedro-20133-patch-1/Scripts/Teste/Main.luau",
 	}
 }
