@@ -9,7 +9,7 @@ Scripts de todos os tipos e jogos aqui!
 Executando o código abaixo em qual quer executor
 ```luau
 _G.SCRIPT_NAME = "" -- OPTIONAL: Script Name
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Pedro-20133/Pedrux-Scripts/refs/heads/main/Scripts/Hub/KeySystem.luau"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Pedro-20133/Pedrux-Scripts/refs/heads/Main/Scripts/Hub/KeySystem.luau"))()
 ```
 
 ## Como obter a key?
