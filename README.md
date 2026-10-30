@@ -8,7 +8,6 @@ Scripts de todos os tipos e jogos aqui!
 ## Como obter?
 Executando o código abaixo em qual quer executor
 ```luau
-getgenv().KEY = "" -- OPTIONAL: Your key
 getgenv().SCRIPT_NAME = { -- OPTIONAL: Script Name
 	Name = "",
   	Configs = {},
