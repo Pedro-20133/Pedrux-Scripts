@@ -1,7 +1,7 @@
 local scripts = {
-	["Exemplo"] = {
-		Name = "Teste",
-		Link = "https://raw.githubusercontent.com/Pedro-20133/Pedrux-Scripts/refs/heads/Pedro-20133-patch-1/Scripts/Teste/Main.luau",
+	["Exemplo"] = { -- Exemple Template Script
+		Name = "Teste", -- False Name
+		Link = "https://raw.githubusercontent.com/Pedro-20133/Pedrux-Scripts/refs/heads/Pedro-20133-patch-1/Scripts/Teste/Main.luau", -- False Link
 	},
 }
 
