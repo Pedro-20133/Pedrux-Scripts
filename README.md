@@ -8,7 +8,9 @@ Scripts de todos os tipos e jogos aqui!
 ## Como obter?
 Executando o código abaixo em qual quer executor
 ```luau
-_G.SCRIPT_NAME = "" -- OPTIONAL: Script Name
+_G.SCRIPT_NAME = ""
+_G.CONFIGS = {}
+
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Pedro-20133/Pedrux-Scripts/refs/heads/Main/Scripts/Hub/KeySystem.luau"))()
 ```
 
