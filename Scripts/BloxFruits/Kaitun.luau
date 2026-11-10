@@ -12,6 +12,10 @@ print("waiting for game...")
 repeat task.wait() until game:IsLoaded() and game.Players.LocalPlayer
 print("game loaded")
 
+for _, a in game:GetDescendants() do
+    if a:IsA("Seat") then a:Destroy() end
+end
+
 local TweenService = cloneref(game:GetService("TweenService"))
 local ReplicatedStorage = cloneref(game:GetService("ReplicatedStorage"))
 local TeleportService = cloneref(game:GetService("TeleportService"))
